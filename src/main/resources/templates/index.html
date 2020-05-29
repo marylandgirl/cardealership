@@ -39,7 +39,8 @@
                 <th>MAKE</th>
                 <th>MODEL</th>
                 <th>YEAR</th>
-                <th>ACTION</th>
+                <th>UPDATE</th>
+                <th>DETAILS</th>
             </thead>
             <tbody>
                 <tr th:each="car : ${cars}">
@@ -47,6 +48,7 @@
                     <td th:text="${car.model}">Model</td>
                     <td th:text="${car.year}">Year</td>
                     <td><a class="btn btn-primary" role=button href="#" th:href="@{/updatecar/{id}(id=${car.id})}">Update</a></td>
+                    <td><a class="btn btn-primary" role=button href="#" th:href="@{/detail/{id}(id=${car.id})}">Details</a></td>
                 </tr>
             </tbody>
         </table>

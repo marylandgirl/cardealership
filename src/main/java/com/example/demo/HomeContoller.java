@@ -94,4 +94,9 @@ public class HomeContoller {
         return "categoryform";
     }
 
+    @RequestMapping("/detail/{id}")
+    public String showCar(@PathVariable("id") long id, Model model) {
+        model.addAttribute("car", carRepository.findById(id).get());
+        return "cardetails";
+    }
 }
