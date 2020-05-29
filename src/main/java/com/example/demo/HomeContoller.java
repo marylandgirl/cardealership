@@ -12,8 +12,6 @@ import java.util.Set;
 @Controller
 public class HomeContoller {
 
-    private int counter = 0;
-
     @Autowired
     CarRepository carRepository;
 
@@ -22,34 +20,6 @@ public class HomeContoller {
 
     @RequestMapping("/")
     public String index(Model model) {
-        counter++;
-        if (counter < 2) {
-            Category category = new Category();
-            category.setName("SUV");
-            Set<Car> catsCars = category.getCars();
-            Car car = new Car();
-            car.setMake("Honda");
-            car.setModel("CRV");
-            car.setYear(2021);
-            car.setCategory(category);
-            catsCars.add(car);
-            categoryRepository.save(category);
-            carRepository.save(car);
-
-            category = new Category();
-            category.setName("Pickup Truck");
-            catsCars = category.getCars();
-
-            car = new Car();
-            car.setMake("Ford");
-            car.setModel("F-150");
-            car.setYear(2019);
-            car.setCategory(category);
-            catsCars.add(car);
-            categoryRepository.save(category);
-            carRepository.save(car);
-        }
-
         model.addAttribute("cars",carRepository.findAll());
         return "index";
     }
