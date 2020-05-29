@@ -3,7 +3,13 @@ package com.example.demo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Controller
 public class HomeContoller {
@@ -18,26 +24,48 @@ public class HomeContoller {
     public String index(Model model) {
         Category category = new Category();
         category.setName("SUV");
-        categoryRepository.save(category);
+        Set<Car> catsCars = category.getCars();
         Car car = new Car();
         car.setMake("Honda");
         car.setModel("CRV");
         car.setYear(2021);
         car.setCategory(category);
+        catsCars.add(car);
+        categoryRepository.save(category);
         carRepository.save(car);
 
         category = new Category();
         category.setName("Pickup Truck");
-        categoryRepository.save(category);
+        catsCars = category.getCars();
 
         car = new Car();
         car.setMake("Ford");
         car.setModel("F-150");
         car.setYear(2019);
         car.setCategory(category);
+        catsCars.add(car);
+        categoryRepository.save(category);
         carRepository.save(car);
 
         model.addAttribute("cars",carRepository.findAll());
         return "index";
+    }
+
+    @GetMapping ("/addcategory")
+    public String categoryForm(Model model) {
+        model.addAttribute("category", new Category());
+        return "categoryform";
+    }
+
+    @PostMapping("/processcatgory")
+    public String processCategory(@ModelAttribute Category category, Model model) {
+        categoryRepository.save(category);
+        return "redirect:/listcategories";
+    }
+
+    @RequestMapping("/listcategories")
+    public String listCategories(Model model) {
+        model.addAttribute("categories", categoryRepository.findAll());
+        return "listcategories";
     }
 }

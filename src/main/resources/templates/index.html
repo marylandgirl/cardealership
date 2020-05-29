@@ -20,10 +20,10 @@
                     <a class="nav-link" href="index.html" th:href="@{/}">Car Listing</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" th:href="@{/#}">Category Listing</a>
+                    <a class="nav-link" href="listcategories.html" th:href="@{/listcategories}">Category Listing</a>
                 </li>
                 <li class-nav-item>
-                    <a class="nav-link" href="#" th:href="@{/#}">Add Category</a>
+                    <a class="nav-link" href="categoryform.html" th:href="@{/addcategory}">Add Category</a>
                 </li>
                 <li class-nav-item>
                     <a class="nav-link "href="#" th:href="@{/#}">Add Car</a>
@@ -42,9 +42,9 @@
             </thead>
             <tbody>
                 <tr th:each="car : ${cars}">
-                    <td th:text="*{car.make}">Make</td>
-                    <td th:text="*{car.model}">Model</td>
-                    <td th:text="*{car.year}">Year</td>
+                    <td th:text="${car.make}">Make</td>
+                    <td th:text="${car.model}">Model</td>
+                    <td th:text="${car.year}">Year</td>
                 </tr>
             </tbody>
         </table>

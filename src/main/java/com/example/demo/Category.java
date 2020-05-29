@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -16,6 +17,7 @@ public class Category {
     public Set<Car> cars;
 
     public Category() {
+        cars = new HashSet<Car>();
     }
 
     public long getId() {
