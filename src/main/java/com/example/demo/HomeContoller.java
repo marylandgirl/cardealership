@@ -3,10 +3,7 @@ package com.example.demo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.HashSet;
@@ -82,6 +79,19 @@ public class HomeContoller {
     public String processCar(@Valid @ModelAttribute Car car) {
         carRepository.save(car);
         return "redirect:/";
+    }
+
+    @RequestMapping("/updatecar/{id}")
+    public String updateCar(@PathVariable("id") long id, Model model ) {
+        model.addAttribute("car", carRepository.findById(id).get());
+        model.addAttribute("categories",categoryRepository.findAll());
+        return "carform";
+    }
+
+    @RequestMapping("/updatecategory/{id}")
+    public String updateCategory(@PathVariable("id") long id,Model model) {
+        model.addAttribute("category",categoryRepository.findById(id).get());
+        return "categoryform";
     }
 
 }

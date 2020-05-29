@@ -37,6 +37,7 @@
         <thead>
             <th>NAME</th>
             <th>CARS</th>
+            <th>ACTION</th>
         </thead>
         <tbody>
             <tr th:each="category : ${categories}">
@@ -46,6 +47,7 @@
                         <li th:text="${car.make} + ' ' + ${car.model}" style="list-style:none">Car Info</li>
                     </ul>
                 </td>
+                <td><a class="btn btn-primary" role=button href="#" th:href="@{/updatecategory/{id}(id=${category.id})}">Update</a></td>
             </tr>
         </tbody>
     </table>

@@ -37,8 +37,10 @@
     <br />
     <form action="#" th:action="@{/processcatgory}" th:object="${category}" method="post" form-inline>
         <input th:type="hidden" th:field="*{id}" hidden/>
-        <label>Category Name</label>
-        <input class="mr-2" for="name" th:field="*{name}"/>
+        <div class="form-group">
+            <label>Category Name</label>
+            <input class="mr-2" for="name" th:field="*{name}"/>
+        </div>
         <button class="btn btn-primary" type="submit">Submit</button>
     </form>
 </div>
