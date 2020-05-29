@@ -17,7 +17,12 @@ public class Category {
     public Set<Car> cars;
 
     public Category() {
-        cars = new HashSet<Car>();
+        this.cars = new HashSet<Car>();
+    }
+
+    public Category(String name) {
+        this();
+        this.name = name;
     }
 
     public long getId() {

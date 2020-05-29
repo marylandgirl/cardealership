@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <title>Category List</title>
+    <title>Car Form</title>
 </head>
 <body>
 <nav class="navbar navbar-expand-sm navbar-light bg-light">
@@ -20,35 +20,45 @@
                 <a class="nav-link" href="index.html" th:href="@{/}">Car Listing</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#" th:href="@{/#}">Category Listing</a>
+                <a class="nav-link" href="listcategories.html" th:href="@{/listcategories}">Category Listing</a>
             </li>
             <li class-nav-item>
                 <a class="nav-link" href="categoryform.html" th:href="@{/addcategory}">Add Category</a>
             </li>
             <li class-nav-item>
-                <a class="nav-link "href="carform.html" th:href="@{/addcar}">Add Car</a>
+                <a class="nav-link "href="#" th:href="@{/#}">Add Car</a>
             </li>
         </ul>
     </div>
 </nav>
 <div class="container">
-    <h2>Listing By Category</h2>
-    <table class="table">
-        <thead>
-            <th>NAME</th>
-            <th>CARS</th>
-        </thead>
-        <tbody>
-            <tr th:each="category : ${categories}">
-                <td th:text="${category.name}">Category</td>
-                <td>
-                    <ul th:each="car : ${category.cars}">
-                        <li th:text="${car.make} + ' ' + ${car.model}" style="list-style:none">Car Info</li>
-                    </ul>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <h2>Car Form</h2>
+    <form action="test.html" th:action="@{/processcar}" th:object="${car}" method="post">
+        <div class="form-group">
+            <input hidden th:type="hidden" th:field="*{id}"/>
+            <label for="make">Make</label>
+            <input class="form-control" id="make" th:field="*{make}"/>
+        </div>
+        <div class="form-group">
+            <label for="model">Model</label>
+            <input class="form-control" id="model" th:field="*{model}"/>
+        </div>
+        <div class="form-group">
+            <label for="year">Year</label>
+            <input class="form-control" id="year" th:type="number" type=number
+                   th:field="*{year}"/>
+        </div>
+        <div class="form-group">
+            <label for="category">Category</label>
+            <select th:field="*{category}" class="form-control" id="category">
+                <option th:each="category : ${categories}"
+                        th:text="${category.name}"
+                        th:value="${category.id}">
+                </option>
+            </select>
+        </div>
+        <button class="btn btn-primary" type="submit">Submit</button>
+    </form>
 </div>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

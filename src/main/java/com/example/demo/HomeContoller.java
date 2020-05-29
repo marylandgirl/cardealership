@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.validation.Valid;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -58,7 +59,8 @@ public class HomeContoller {
     }
 
     @PostMapping("/processcatgory")
-    public String processCategory(@ModelAttribute Category category, Model model) {
+    public String processCategory(@Valid @ModelAttribute Category category) {
+        System.out.print("Kim the category added is " + category.getName());
         categoryRepository.save(category);
         return "redirect:/listcategories";
     }
@@ -68,4 +70,18 @@ public class HomeContoller {
         model.addAttribute("categories", categoryRepository.findAll());
         return "listcategories";
     }
+
+    @GetMapping("/addcar")
+    public String carForm(Model model) {
+        model.addAttribute("car", new Car());
+        model.addAttribute("categories",categoryRepository.findAll());
+        return "carform";
+    }
+
+    @PostMapping("/processcar")
+    public String processCar(@Valid @ModelAttribute Car car) {
+        carRepository.save(car);
+        return "redirect:/";
+    }
+
 }

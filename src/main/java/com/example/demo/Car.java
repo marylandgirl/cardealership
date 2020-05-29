@@ -17,6 +17,7 @@ public class Car {
     private Category category;
 
     public Car() {
+        this.category = null;
     }
 
     public long getId() {
